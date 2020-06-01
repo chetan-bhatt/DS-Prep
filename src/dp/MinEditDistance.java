@@ -58,7 +58,7 @@ public class MinEditDistance {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(editDistance("horse", "ros"));
+		System.out.println(editDistance("a", "a"));
 	}
 
 }

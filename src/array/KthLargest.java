@@ -36,7 +36,6 @@ public class KthLargest {
 			}
 		}
 		swap(nums, pIndex, end);
-		System.out.println(" final pivot index = " + pIndex);
 		return pIndex;
 	}
 	

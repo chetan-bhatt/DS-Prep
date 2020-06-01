@@ -22,7 +22,7 @@ public class PalidromePartitioning {
 	            partitionHelper(a.substring(1), chosen);
 	            
 	            chosen.remove(chosen.size() - 1);
-	            partitionHelper(a.substring(1), chosen);
+	           // partitionHelper(a.substring(1), chosen);
 	          //  a = c + a;
 	        }
 	    }

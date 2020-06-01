@@ -21,7 +21,7 @@ public class SubSet {
 			
 			chosen.add(num);
 			subsetHelper(A, chosen);
-			
+				
 			chosen.remove(chosen.size() - 1);
 			subsetHelper(A, chosen);
 			

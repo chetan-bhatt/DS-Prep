@@ -22,7 +22,6 @@ class CountWays{
     			int r = countWaysHelper(number, remainingNumber - i);
     			if(r >= 0) {
     				result = 1 + r;
-        			System.out.println(" rsult = " + result);
     			}
     		}
     		return result;

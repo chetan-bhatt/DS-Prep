@@ -47,9 +47,9 @@ public class AddNumbers {
 	
 	public static void main(String[] args) {
 		LinkedListUtil util = new LinkedListUtil();
-		Node node1 = util.add(new int[] {1, 3, 3, 4});
+		Node node1 = util.add(new int[] {9, 8});
 		util = new LinkedListUtil();
-		Node node2 = util.add(new int[] {9, 9});
+		Node node2 = util.add(new int[] {1});
 		Node resultNode = new AddNumbers().add(node1, node2);
 		util.print(resultNode);
 	}
