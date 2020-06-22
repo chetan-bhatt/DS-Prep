@@ -3,64 +3,49 @@ package backtracking;
 public class SudokuSolver {
     public void solveSudoku(char[][] board) {
         
+        
         helper(board);
     }
     
     private boolean helper(char[][] board){
-        for(int row = 0; row < 9; row++){
-            for(int col = 0; col < 9; col++){
-            		if(board[row][col] != '.') {
-            			continue;
-            		}
-            		for(int num = 1; num <= 9; num++) {
-            			char c = (char)(num+'0');
-                    if(isSafe(board, row, col, c)){
-                        place(board, row, col, c);
-                        boolean result = helper(board);
-                        if(result){
-                            return true;
+        
+        for(int row = 0; row <= 8; row++){
+            for(int col = 0; col <= 8; col++){
+                if(board[row][col] == '.'){
+                    for(char j = '1'; j <= '9'; j++){
+                        if(isSafe(board, row, col, j)){
+                            place(board, row, col, j);
+                            if(helper(board)){
+                                return true;
+                            }
+                            remove(board, row, col);
                         }
-                        remove(board, row, col);
-                    }	
-            		}
-            		return false;
-            }
-        }
-    
-        return true;
-    }
-        
-        
-    private boolean isSafe(char[][] board, int row, int col, char c){
-        for(int i = 0; i < 9; i++){
-            if(board[row][i] == c){
-                return false;
-            }
-        }
-        for(int i = 0; i < 9; i++){
-            if(board[i][col] == c){
-                return false;
-            }
-        }
-         int r = row - row%3;
-        int cl = col - col%3;
-        for(int i = r ; i< r+3 ; i++)
-        {
-            for(int j = cl; j < cl+3 ; j++)
-            {
-                if(board[i][j]==c)
-                {
+                    }
                     return false;
                 }
             }
-
         }
         return true;
     }
-        
-    private void place(char[][] board, int row, int col, char c){
-        board[row][col] = c;
-    }    
+    
+    private boolean isSafe(char[][] board, int row, int col, char num){
+        for(int i = 0; i < 9; i++){
+            if(board[i][col] == num){
+                return false;
+            }
+            if(board[row][i] == num){
+                return false;
+            }
+            if(board[3 * (row/3) + i/3][3 * (col/3) + i % 3] == num){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    private void place(char[][] board, int row, int col, char num){
+        board[row][col] = num;
+    }
     
     private void remove(char[][] board, int row, int col){
         board[row][col] = '.';
