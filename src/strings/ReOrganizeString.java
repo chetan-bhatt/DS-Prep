@@ -3,10 +3,11 @@ package strings;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class ReOrganizeString {
 	public String reorganizeString(String S) {
-        if(S == null || S.length() == 0){
+        if(S == null || S.isEmpty()){
             return "";
         }
         
@@ -14,41 +15,35 @@ public class ReOrganizeString {
         for(int i = 0; i < S.length(); i++){
             char c = S.charAt(i);
             map.put(c, map.getOrDefault(c, 0) + 1);
-        }
-        
-        PriorityQueue<Map.Entry<Character, Integer>> queue = new PriorityQueue<>((a, b) -> a.getValue() == b.getValue() ? a.getKey() - b.getKey() : b.getValue() - a.getValue());
-        
-        for(Map.Entry<Character, Integer> entry : map.entrySet()){
-            if(entry.getValue() > (S.length() + 1)/2){
+            if(map.get(c) > (S.length() + 1)/2){
                 return "";
             }
-            queue.add(entry);
+        }
+        Queue<Character> maxHeap = new PriorityQueue<>((a, b) -> map.get(b) - map.get(a));
+        maxHeap.addAll(map.keySet());
+        
+        String result = "";
+        while(maxHeap.size() >= 2){
+            char c1 = maxHeap.poll();
+            result += c1;
+            char c2 = maxHeap.poll();
+            result += c2;
+            
+            map.put(c1, map.get(c1) - 1);
+            map.put(c2, map.get(c2) - 1);
+            
+            if(map.get(c1) > 0){
+                maxHeap.add(c1);
+            }
+            if(map.get(c2) > 0){
+                maxHeap.add(c2);
+            }
         }
         
-        StringBuilder sb = new StringBuilder();
-        while(!queue.isEmpty() && queue.size() >= 2){
-            Map.Entry<Character, Integer> entry1 = queue.poll();
-            Map.Entry<Character, Integer> entry2 = queue.poll();
-            
-            sb.append(entry1.getKey());
-            sb.append(entry2.getKey());
-            
-            int count1 = entry1.getValue();
-            if(--count1 > 0){
-                entry1.setValue(count1);
-                queue.add(entry1);
-            }
-            
-            int count2 = entry2.getValue();
-            if(--count2 > 0){
-                entry2.setValue(count2);
-                queue.add(entry2);
-            }
+        while(!maxHeap.isEmpty()){
+            result += maxHeap.poll();
         }
-        if(!queue.isEmpty()){
-            sb.append(queue.poll().getKey());
-        }
-        return sb.toString();
+        return result;
     }
 	
 	public static void main(String[] args) {

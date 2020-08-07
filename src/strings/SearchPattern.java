@@ -7,18 +7,14 @@ public class SearchPattern {
 			return -1;
 		}
 		
-		int n = s.length();
-		int m = pattern.length();
-		
-		for(int i = 0; i <= n-m; i++) {
+		for(int i = 0; i <= s.length() - pattern.length(); i++) {
 			int j;
-			
-			for(j = 0; j < m; j++) {
-				if(s.charAt(i+j) != pattern.charAt(j)) {
+			for(j = 0; j < pattern.length(); j++) {
+				if(s.charAt(i + j) != pattern.charAt(j)) {
 					break;
 				}
 			}
-			if(j == m) {
+			if(j == pattern.length()) {
 				return i;
 			}
 		}
@@ -26,8 +22,10 @@ public class SearchPattern {
 	}
 	
 	
+	
+	
 	public static void main(String[] args) {
-		System.out.println(new SearchPattern().search("abcdefgh", "xxx"));
+		System.out.println(new SearchPattern().search("abcdefgh", "de"));
 	}
 
 }

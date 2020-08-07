@@ -27,6 +27,6 @@ public class StringCompression {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(compress("abc"));
+		System.out.println(compress("aabc"));
 	}
 }

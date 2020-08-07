@@ -28,7 +28,7 @@ public class PalidromePartitioning {
 	    }
 	    
 	    public static void main(String[] args) {
-	    		ArrayList<ArrayList<String>> result = new PalidromePartitioning().partition("abc");
+	    		ArrayList<ArrayList<String>> result = new PalidromePartitioning().partition("abac");
 	    		result.forEach(l ->{
 	    			System.out.println(Arrays.toString(l.toArray()));
 	    		});

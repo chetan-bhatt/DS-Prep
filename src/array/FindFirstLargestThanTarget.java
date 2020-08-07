@@ -35,9 +35,6 @@ public class FindFirstLargestThanTarget {
 					}
 				}
 			}
-			
-			
-			
 		}
 		
 		return -1;

@@ -2,42 +2,28 @@ package dp;
 
 public class LongestPalidromicSubstring {
 	
-	private static int count;
+	private static int start = 0;
+	private static int end = 0;
 	static int longestPalindromicSubstring(String s) {
 		
-		helper(s, 0, s.length()-1, 0);
-		return count;
+		for(int i = 0; i < s.length() - 1; i++) {
+			helper(s, i, i);
+			helper(s, i, i+1);
+		}
+		return end - start + 1;
 	}
 	
-	static void helper(String s1, int i, int j, int count) {
-		if(i >= s1.length() - 1) {
-			return ;
+	static void helper(String s, int i, int j) {
+		while(i>= 0 && j < s.length() && s.charAt(i) == s.charAt(j)) {
+			i--;
+			j++;
 		}
-		if(j <= 0) {
-			return;
+		i++;
+		j--;
+		if(j - i > end - start) {
+			start = i;
+			end = j;
 		}
-		if(i == j) {
-			if(s1.charAt(i) == s1.charAt(j)) {
-				count++;
-				return;
-			} else {
-				return;
-			}
-		}
-		
-		if(s1.charAt(i) == s1.charAt(j)) {
-			count +=2;
-			helper(s1, i+1, j-1, 0);
-		} else {
-			count = 0;
-			helper(s1,  i+1, j, 0); helper(s1, i, j-1, 0);
-		}
-		
-		
-		
-		//
-		// feaaaaebcdcba
-		
 		
 	}
 
